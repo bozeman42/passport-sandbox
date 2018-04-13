@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const passport = require('./strategies/local-strategy');
+const passport = require('./strategies/local-strategy').passport;
+const addUser = require('./strategies/local-strategy').addUser;
 const sessionConfig = require('./modules/session.config');
+const encryption = require('./modules/encryption');
 
 const PORT = 5000;
 
@@ -24,6 +26,12 @@ app.post('/user',
     failureRedirect: '/failsauce'
   })
 );
+
+app.post('/newuser',(req,res) => {
+  const { username, password } = req.body;
+  addUser(username,password);
+  res.sendStatus(201);
+})
 
 app.get('/wow', (req,res)  => {
   console.log('wow!');

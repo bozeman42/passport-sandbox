@@ -1,18 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const encryption = require('../modules/encryption');
 
-const users = [
-  {
-    id: 1,
-    username: 'someUser',
-    password: 'somePassword'
-  },
-  {
-    id: 2,
-    username: 'otherUser',
-    password: 'otherPassword'
-  }
-];
+let counter = 0;
+const users = [];
 
 passport.serializeUser((user,done) => {
   console.log('serialize user',user);
@@ -32,11 +23,22 @@ passport.use('local', new LocalStrategy(
     console.log(user);
     if (user.length !== 1) {
       return done(null, false, {message: 'Incorrect username'});
-    } else if (user[0].password !== password) {
+    } else if (!encryption.comparePassword(password,user[0].password)) {
       return done(null, false, {message: 'Incorrect password'});
     }
     return done(null, user[0]);
   }
 ));
 
-module.exports = passport;
+module.exports = {
+  passport,
+  addUser: (username, password) => {
+    users.push({
+      id: counter,
+      username: username,
+      password: encryption.encryptPassword(password)
+    });
+    counter++
+    console.log(users);
+  }
+}

@@ -11,14 +11,12 @@
 <body ng-app="app">
   <div ng-controller="main as mc">
     <h1>{{mc.message}}</h1>
-    <form ng-submit="mc.submit()">
+    <form>
       <div>
-        <input type="text" ng-model="mc.userInfo.username" placeholder="someUser" />
-        <input type="password" ng-model="mc.userInfo.password" placeholder="somePassword" />
-        <button type="submit">Submit</button>
-      </div>
-      <div>
-        The placeholders are a valid login!
+        <input type="text" ng-model="mc.userInfo.username" placeholder="Username" />
+        <input type="password" ng-model="mc.userInfo.password" placeholder="Password" />
+        <button ng-click="mc.submit()" type="submit">LogIn</button>
+        <button ng-click="mc.register()" type="submit">Register</button>
       </div>
     </form>
     <div>

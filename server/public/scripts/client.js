@@ -33,4 +33,12 @@ app.controller('main',function($http) {
       vm.message = "Logged out. Thank you!";
     });
   }
+
+  vm.register = function() {
+    $http.post('/newuser',vm.userInfo)
+    .then(response => {
+      vm.message = "Registered"
+    })
+    .catch(error => "failed to register");
+  }
 })
