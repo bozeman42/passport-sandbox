@@ -1,6 +1,6 @@
 # Passport test repo
 ## Purpose
-Previously when using passport for authentication I have used a starter repo with passport already set up. This didn't feel great so I made this to go through the process and get a feel for what's going on.
+Previously when using passport for authentication I have used a starter repo with passport already set up. This didn't feel great so I made this to go through the process and get a feel for what's going on. This was just a quick exercise, so this won't check for duplicate usernames. If you add the same username twice, only the first one added will work. (it's just putting them in an array and getting the first one with that username returned)
 ## Pre-requisites
 To run this locally, you must have Node.js and `npm` or `yarn` installed.
 ## Setup

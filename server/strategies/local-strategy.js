@@ -20,8 +20,8 @@ passport.use('local', new LocalStrategy(
   function (username, password, done) {
     console.log('username:',username, 'password',password);
     user = users.filter(user => user.username === username);
-    console.log(user);
-    if (user.length !== 1) {
+    console.log(user, password);
+    if (user.length < 1) {
       return done(null, false, {message: 'Incorrect username'});
     } else if (!encryption.comparePassword(password,user[0].password)) {
       return done(null, false, {message: 'Incorrect password'});
